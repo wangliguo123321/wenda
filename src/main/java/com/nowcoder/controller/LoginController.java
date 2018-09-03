@@ -1,11 +1,9 @@
 package com.nowcoder.controller;
 
-import com.nowcoder.async.EventHandler;
 import com.nowcoder.async.EventModel;
 import com.nowcoder.async.EventProducer;
 import com.nowcoder.async.EventType;
 import com.nowcoder.service.UserService;
-import com.nowcoder.util.WendaUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-/**
- * Created by nowcoder on 2016/7/2.
- */
+
 @Controller
 public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
