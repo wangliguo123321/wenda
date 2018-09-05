@@ -17,10 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by nowcoder on 2016/7/15.
- */
 @Controller
 public class HomeController {
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -53,10 +49,15 @@ public class HomeController {
         return vos;
     }
 
-    @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(path = "index", method = {RequestMethod.GET, RequestMethod.POST})
     public String index(Model model,
                         @RequestParam(value = "pop", defaultValue = "0") int pop) {
         model.addAttribute("vos", getQuestions(0, 0, 10));
+        return "index";
+    }
+
+    @RequestMapping(path = "go", method = {RequestMethod.GET, RequestMethod.POST})
+    public String go(){
         return "index";
     }
 

@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/24.
- */
 @Service
 public class MessageService {
 

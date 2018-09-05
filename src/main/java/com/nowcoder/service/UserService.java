@@ -13,14 +13,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-/**
- * Created by nowcoder on 2016/7/2.
- */
+
 @Service
 public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
-    private UserDAO userDAO;
+    UserDAO userDAO;
 
     @Autowired
     private LoginTicketDAO loginTicketDAO;
@@ -30,7 +28,7 @@ public class UserService {
     }
 
     public Map<String, Object> register(String username, String password) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap <>();
         //做判断的类，判断账号密码非空；
         if (StringUtils.isBlank(username)) {
             map.put("msg", "用户名不能为空");
@@ -40,7 +38,7 @@ public class UserService {
             map.put("msg", "密码不能为空");
             return map;
         }
-   //做判断，判断注册用户数据库中不存在；
+         //做判断，判断注册用户数据库中不存在；
         User user = userDAO.selectByName(username);
 
         if (user != null) {
@@ -48,7 +46,7 @@ public class UserService {
             return map;
         }
 
-  // 密码强度，加sort
+  //增强密码强度，加sort
   //将用户增加到数据库；
         user = new User();
         user.setName(username);
