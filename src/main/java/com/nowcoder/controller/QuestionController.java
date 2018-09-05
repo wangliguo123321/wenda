@@ -87,7 +87,8 @@ public class QuestionController {
 
     @RequestMapping(value = "/question/add", method = {RequestMethod.POST})
     @ResponseBody
-    public String addQuestion(@RequestParam("title") String title, @RequestParam("content") String content) {
+    public String addQuestion(@RequestParam("title") String title,
+                              @RequestParam("content") String content) {
         try {
             Question question = new Question();
             question.setContent(content);

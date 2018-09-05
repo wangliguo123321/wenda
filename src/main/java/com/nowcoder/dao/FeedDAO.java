@@ -3,10 +3,11 @@ package com.nowcoder.dao;
 import com.nowcoder.model.Comment;
 import com.nowcoder.model.Feed;
 import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-
+@ResponseBody
 @Mapper
 public interface FeedDAO {
     String TABLE_NAME = " feed ";

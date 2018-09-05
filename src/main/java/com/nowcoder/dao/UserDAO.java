@@ -2,7 +2,9 @@ package com.nowcoder.dao;
 
 import com.nowcoder.model.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+@ResponseBody
 @Mapper
 public interface UserDAO {
     String TABLE_NAME = "user";
