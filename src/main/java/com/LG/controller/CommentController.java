@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 
+/**
+ * @Author liguo
+ * @Description
+ * @Data 2018-09-06 8:53
+ */
 
 @Controller
 public class CommentController {
@@ -45,18 +50,18 @@ public class CommentController {
             if (hostHolder.getUser() != null) {
                 comment.setUserId(hostHolder.getUser().getId());
             } else {
-                comment.setUserId(WendaUtil.ANONYMOUS_USERID);
+                comment.setUserId( WendaUtil.ANONYMOUS_USERID );
                 // return "redirect:/reglogin";
             }
             comment.setCreatedDate(new Date());
-            comment.setEntityType(EntityType.ENTITY_QUESTION);
+            comment.setEntityType( EntityType.ENTITY_QUESTION );
             comment.setEntityId(questionId);
             commentService.addComment(comment);
 
             int count = commentService.getCommentCount(comment.getEntityId(), comment.getEntityType());
             questionService.updateCommentCount(comment.getEntityId(), count);
 
-            eventProducer.fireEvent(new EventModel(EventType.COMMENT).setActorId(comment.getUserId())
+            eventProducer.fireEvent( new EventModel( EventType.COMMENT ).setActorId( comment.getUserId() )
                     .setEntityId(questionId));
 
         } catch (Exception e) {
@@ -64,4 +69,5 @@ public class CommentController {
         }
         return "redirect:/question/" + questionId;
     }
+}
 }
