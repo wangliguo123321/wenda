@@ -3,6 +3,7 @@ package com.LG.controller;
 import com.LG.async.EventModel;
 import com.LG.async.EventProducer;
 import com.LG.async.EventType;
+import com.LG.model.Comment;
 import com.LG.model.EntityType;
 import com.LG.model.HostHolder;
 import com.LG.service.CommentService;

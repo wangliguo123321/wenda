@@ -11,8 +11,6 @@ import java.util.List;
 /**
  * @Author liguo
  * @Description
- * @问题：
- * @思路：
  * @Data 2018-09-06 8:54
  */
 
@@ -28,6 +26,7 @@ public class CommentService {
         return commentDAO.selectCommentByEntity( entityId, entityType );
     }
 
+    //过滤敏感词后进行插入
     public int addComment(Comment comment) {
         comment.setContent( HtmlUtils.htmlEscape( comment.getContent() ) );
         comment.setContent( sensitiveService.filter( comment.getContent() ) );
@@ -50,6 +49,4 @@ public class CommentService {
         return commentDAO.getCommentById( id );
     }
 
-    public void addComment(Comment comment) {
-    }
 }

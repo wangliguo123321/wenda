@@ -1,7 +1,11 @@
 package com.LG.model;
-
 import java.util.Date;
 
+/**
+ * @Author liguo
+ * @Description
+ * @Data 2018-09-06 14:21
+ */
 
 public class Message {
     private int id;
