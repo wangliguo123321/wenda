@@ -14,7 +14,6 @@ public class Message {
     private String content;
     private Date createdDate;
     private int hasRead;
-    private String conversationId;
 
     public int getId() {
         return id;
@@ -73,6 +72,6 @@ public class Message {
     }
 
     public void setConversationId(String conversationId) {
-        this.conversationId = conversationId;
+        String conversationId1 = conversationId;
     }
 }

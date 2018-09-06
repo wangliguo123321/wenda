@@ -5,7 +5,7 @@ import com.LG.async.EventModel;
 import com.LG.async.EventType;
 import com.LG.model.Message;
 import com.LG.model.User;
-import com.LG.service.MessageService;
+import com.LG.service.MessageServices;
 import com.LG.service.UserService;
 import com.LG.util.WendaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.List;
 @Component
 public class LikeHandler implements EventHandler {
     @Autowired
-    MessageService messageService;
+    MessageServices messageService;
 
     @Autowired
     UserService userService;

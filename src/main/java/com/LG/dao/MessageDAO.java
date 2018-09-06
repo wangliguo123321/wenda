@@ -8,6 +8,12 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+/**
+ * @Author liguo
+ * @Description
+ * @Data 2018-09-06 14:38
+ */
+
 
 @Mapper
 public interface MessageDAO {
@@ -27,6 +33,7 @@ public interface MessageDAO {
 
     @Select({"select ", INSERT_FIELDS, " , count(id) as id from ( select * from ", TABLE_NAME,
             " where from_id=#{userId} or to_id=#{userId} order by created_date desc) tt group by conversation_id order by created_date desc limit #{offset}, #{limit}"})
+        //实现分页功能；offset是分的页数目 ，limit为每页显示的内容；
     List <Message> getConversationList(@Param("userId") int userId,
                                        @Param("offset") int offset,
                                        @Param("limit") int limit);

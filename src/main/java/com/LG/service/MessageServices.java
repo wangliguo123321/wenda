@@ -7,8 +7,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @Author liguo
+ * @Description
+ * @Data 2018-09-06 14:55
+ */
+
 @Service
-public class MessageService {
+public class MessageServices {
 
     @Autowired
     MessageDAO messageDAO;

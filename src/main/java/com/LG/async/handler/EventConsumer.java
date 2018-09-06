@@ -1,5 +1,8 @@
-package com.LG.async;
+package com.LG.async.handler;
 
+import com.LG.async.EventHandler;
+import com.LG.async.EventModel;
+import com.LG.async.EventType;
 import com.LG.util.JedisAdapter;
 import com.LG.util.RedisKeyUtil;
 import com.alibaba.fastjson.JSON;
@@ -18,7 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by LG on 2016/7/30.
+ * @Author liguo
+ * @Description
+ * @Data 2018-09-07 7:46
  */
 @Service
 public class EventConsumer implements InitializingBean, ApplicationContextAware {

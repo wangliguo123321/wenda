@@ -4,7 +4,7 @@ import com.LG.model.HostHolder;
 import com.LG.model.Message;
 import com.LG.model.User;
 import com.LG.model.ViewObject;
-import com.LG.service.MessageService;
+import com.LG.service.MessageServices;
 import com.LG.service.UserService;
 import com.LG.util.WendaUtil;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class MessageController {
     HostHolder hostHolder;
 
     @Autowired
-    MessageService messageService;
+    MessageServices messageService;
 
     @Autowired
     UserService userService;
