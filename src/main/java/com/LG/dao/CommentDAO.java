@@ -2,6 +2,7 @@ package com.LG.dao;
 
 import com.LG.model.Comment;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @Description
  * @Data 2018-09-06 8:05
  */
-
+@Component
 @Mapper
 public interface CommentDAO {
     String TABLE_NAME = " comment ";

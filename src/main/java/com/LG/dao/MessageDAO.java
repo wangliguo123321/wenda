@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @Data 2018-09-06 14:38
  */
 
+@Component
 
 @Mapper
 public interface MessageDAO {

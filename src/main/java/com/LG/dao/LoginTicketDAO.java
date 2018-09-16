@@ -2,6 +2,9 @@ package com.LG.dao;
 
 import com.LG.model.LoginTicket;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
+
+@Component
 
 @Mapper
 public interface LoginTicketDAO {

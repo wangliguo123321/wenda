@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class CommentService {
     @Autowired
-    CommentDAO commentDAO;
+    private CommentDAO commentDAO;
 
     @Autowired
     SensitiveService sensitiveService;

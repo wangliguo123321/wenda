@@ -5,11 +5,13 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@ResponseBody
+@Component
+
 @Mapper
 public interface FeedDAO {
     String TABLE_NAME = " feed ";
@@ -18,7 +20,7 @@ public interface FeedDAO {
 
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,
             ") values (#{userId},#{data},#{createdDate},#{type})"})
-    int addFeed(Feed feed);
+    void addFeed(Feed feed);
 
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where id=#{id}"})
     Feed getFeedById(int id);

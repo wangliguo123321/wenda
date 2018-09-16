@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,7 +22,7 @@ public class UserService {
     UserDAO userDAO;
 
     @Autowired
-    private LoginTicketDAO loginTicketDAO;
+    LoginTicketDAO loginTicketDAO;
 
     public User selectByName(String name) {
         return userDAO.selectByName( name );
