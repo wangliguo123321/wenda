@@ -4,12 +4,11 @@ import com.LG.model.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@ResponseBody
 @Mapper
 public interface UserDAO {
     String TABLE_NAME = "user";
     String INSET_FIELDS = " name, password, salt, head_url ";
-    String SELECT_FIELDS = " id, name, password, salt, head_url";
+    String SELECT_FIELDS = " id, name, password, salt, head_url ";
 
     @Insert({"insert into ", TABLE_NAME, "(", INSET_FIELDS,
             ") values (#{name},#{password},#{salt},#{headUrl})"})

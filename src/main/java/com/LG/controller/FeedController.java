@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by LG on 2016/7/15.
- */
 @Controller
 public class FeedController {
     private static final Logger logger = LoggerFactory.getLogger( FeedController.class );

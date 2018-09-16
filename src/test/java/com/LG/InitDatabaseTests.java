@@ -25,19 +25,14 @@ import java.util.Random;
 public class InitDatabaseTests {
     @Autowired
     UserDAO userDAO;
-
     @Autowired
     QuestionDAO questionDAO;
-
     @Autowired
     SensitiveService sensitiveUtil;
-
     @Autowired
     FollowService followService;
-
     @Autowired
     JedisAdapter jedisAdapter;
-
     @Test
     public void contextLoads() {
         Random random = new Random();
