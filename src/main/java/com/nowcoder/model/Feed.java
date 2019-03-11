@@ -1,12 +1,14 @@
 package com.nowcoder.model;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.Map;
 
 @Data
+@Component
+
 public class Feed {
     private int id;
     private int type;
