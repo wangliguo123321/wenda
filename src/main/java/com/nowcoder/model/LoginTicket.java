@@ -2,7 +2,7 @@ package com.nowcoder.model;
 
 import java.util.Date;
 
-
+@Data
 public class LoginTicket {
     private int id;
     private int userId;
