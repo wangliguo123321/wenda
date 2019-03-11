@@ -2,13 +2,11 @@ package com.nowcoder.dao;
 
 import com.nowcoder.model.Question;
 import com.nowcoder.model.User;
+import lombok.Data;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/2.
- */
 @Mapper
 public interface QuestionDAO {
     String TABLE_NAME = " question ";

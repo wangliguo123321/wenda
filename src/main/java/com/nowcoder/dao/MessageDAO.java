@@ -2,13 +2,11 @@ package com.nowcoder.dao;
 
 import com.nowcoder.model.Comment;
 import com.nowcoder.model.Message;
+import lombok.Data;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/24.
- */
 @Mapper
 public interface MessageDAO {
     String TABLE_NAME = " message ";
