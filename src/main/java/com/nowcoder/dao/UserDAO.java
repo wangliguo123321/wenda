@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserDAO {
+
+
+
     String TABLE_NAME = "user";
     String INSET_FIELDS = " name, password, salt, head_url ";
     String SELECT_FIELDS = " id, name, password, salt, head_url";
