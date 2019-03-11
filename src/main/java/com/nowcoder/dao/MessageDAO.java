@@ -4,7 +4,6 @@ import com.nowcoder.model.Comment;
 import com.nowcoder.model.Message;
 import lombok.Data;
 import org.apache.ibatis.annotations.*;
-
 import java.util.List;
 
 @Mapper

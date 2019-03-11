@@ -2,10 +2,10 @@ package com.nowcoder.dao;
 
 import com.nowcoder.model.Comment;
 import com.nowcoder.model.Question;
-import lombok.Data;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+
 
 @Mapper
 public interface CommentDAO {
