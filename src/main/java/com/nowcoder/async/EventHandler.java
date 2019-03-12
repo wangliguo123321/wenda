@@ -2,9 +2,8 @@ package com.nowcoder.async;
 
 import java.util.List;
 
-/**
- * Created by nowcoder on 2016/7/30.
- */
+
+//第四步：对应事件的处理
 public interface EventHandler {
     void doHandle(EventModel model);
 
