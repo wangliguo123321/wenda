@@ -17,7 +17,6 @@ import java.util.Date;
 
 @Component
 public class PassportInterceptor implements HandlerInterceptor {
-
     @Autowired
     private LoginTicketDAO loginTicketDAO;
 
