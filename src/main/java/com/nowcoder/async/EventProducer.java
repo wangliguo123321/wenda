@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-/**
- * Created by nowcoder on 2016/7/30.
- */
+//第三步：发生事件，序列化后保存到队列
 @Service
 public class EventProducer {
     @Autowired
@@ -21,7 +19,7 @@ public class EventProducer {
         try {
             String json = JSONObject.toJSONString(eventModel);
             String key = RedisKeyUtil.getEventQueueKey();
-            jedisAdapter.lpush(key, json);
+            jedisAdapter.lpush(key, json);     //事件序列化，储存在队列中
             return true;
         } catch (Exception e) {
             return false;
