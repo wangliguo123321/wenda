@@ -73,7 +73,7 @@ public class SensitiveService implements InitializingBean {
 
 
     /**
-     * 判断是否是一个符号
+     * 判断是否是一个符号，过滤掉颜表情等各种符号
      */
     private boolean isSymbol(char c) {
         int ic = (int) c;
@@ -135,6 +135,10 @@ public class SensitiveService implements InitializingBean {
         return result.toString();
     }
 
+    /**
+     * 读取的文本生成前缀树
+     * @param lineTxt
+     */
     private void addWord(String lineTxt) {
         TrieNode tempNode = rootNode;
         // 循环每个字节
@@ -162,7 +166,7 @@ public class SensitiveService implements InitializingBean {
 
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet()  {
         rootNode = new TrieNode();
 
         try {
