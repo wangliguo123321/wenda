@@ -15,9 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by nowcoder on 2016/7/30.
- */
+//第五步：对应事件的处理
 @Service
 public class EventConsumer implements InitializingBean, ApplicationContextAware {
     private static final Logger logger = LoggerFactory.getLogger( EventConsumer.class );
@@ -48,14 +46,14 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
             public void run() {
                 while (true) {
                     String key = RedisKeyUtil.getEventQueueKey();
-                    List <String> events = jedisAdapter.brpop( 0, key );
+                    List <String> events = jedisAdapter.brpop( 0, key );//，拿到队列最后已给元素，队列中没有需要的就卡住
 
                     for (String message : events) {
                         if (message.equals( key )) {
                             continue;
                         }
 
-                        EventModel eventModel = JSON.parseObject( message, EventModel.class );
+                        EventModel eventModel = JSON.parseObject( message, EventModel.class );//事件反序列化
                         if (!config.containsKey( eventModel.getType() )) {
                             logger.error( "不能识别的事件" );
                             continue;
