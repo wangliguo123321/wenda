@@ -6,17 +6,15 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by nowcoder on 2016/7/30.
- */
+//第二步：定义事件发生过程
 public class EventModel {
     private EventType type;
     private int actorId;
     private int entityType;
-    private int entityId;
+    private int entityId;       //entityType实体的id；
     private int entityOwnerId;
 
-    private Map<String, String> exts = new HashMap<String, String>();
+    private Map<String, String> exts = new HashMap();//存放扩展字段
 
     public EventModel() {
 
