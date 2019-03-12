@@ -38,13 +38,15 @@ public class JedisAdapter implements InitializingBean {
         //
         jedis.set("pv", "100");
         jedis.incr("pv");
-        jedis.incrBy("pv", 5);
+        jedis.incrBy("pv", 5);//一次加五
         print(2, jedis.get("pv"));
         jedis.decrBy("pv", 2);
         print(2, jedis.get("pv"));
 
-        print(3, jedis.keys("*"));
+        print(3, jedis.keys("*"));//打印出来所有的key
 
+
+        //
         String listName = "list";
         jedis.del(listName);
         for (int i = 0; i < 10; ++i) {
@@ -52,14 +54,14 @@ public class JedisAdapter implements InitializingBean {
         }
         print(4, jedis.lrange(listName, 0, 12));
         print(4, jedis.lrange(listName, 0, 3));
-        print(5, jedis.llen(listName));
-        print(6, jedis.lpop(listName));
-        print(7, jedis.llen(listName));
+        print(5, jedis.llen(listName));//长度
+        print(6, jedis.lpop(listName));//先进后出，pop
+        print(7, jedis.llen(listName));//长度
         print(8, jedis.lrange(listName, 2, 6));
         print(9, jedis.lindex(listName, 3));
-        print(10, jedis.linsert(listName, BinaryClient.LIST_POSITION.AFTER, "a4", "xx"));
-        print(10, jedis.linsert(listName, BinaryClient.LIST_POSITION.BEFORE, "a4", "bb"));
-        print(11, jedis.lrange(listName, 0 ,12));
+        print(10, jedis.linsert(listName, BinaryClient.LIST_POSITION.AFTER, "a4", "xx"));//插入
+        print(10, jedis.linsert(listName, BinaryClient.LIST_POSITION.BEFORE, "a4", "bb"));//删除
+        print(11, jedis.lrange(listName, 0 ,12)) ;
 
         // hash
         String userKey = "userxx";
@@ -78,33 +80,33 @@ public class JedisAdapter implements InitializingBean {
         jedis.hsetnx(userKey, "name", "yxy");
         print(19, jedis.hgetAll(userKey));
 
-        // set
+        // set集和
         String likeKey1 = "commentLike1";
         String likeKey2 = "commentLike2";
         for (int i = 0; i < 10; ++i) {
             jedis.sadd(likeKey1, String.valueOf(i));
             jedis.sadd(likeKey2, String.valueOf(i*i));
         }
-        print(20, jedis.smembers(likeKey1));
+        print(20, jedis.smembers(likeKey1)); //smembers（key）取值
         print(21, jedis.smembers(likeKey2));
-        print(22, jedis.sunion(likeKey1, likeKey2));
-        print(23, jedis.sdiff(likeKey1, likeKey2));
-        print(24, jedis.sinter(likeKey1, likeKey2));
-        print(25, jedis.sismember(likeKey1, "12"));
-        print(26, jedis.sismember(likeKey2, "16"));
+        print(22, jedis.sunion(likeKey1, likeKey2));//求并集
+        print(23, jedis.sdiff(likeKey1, likeKey2)); //补集
+        print(24, jedis.sinter(likeKey1, likeKey2));//交集
+        print(25, jedis.sismember(likeKey1, "12"));//判断是否存在
+        print(26, jedis.sismember(likeKey2, "16"));//判断
         jedis.srem(likeKey1, "5");
         print(27, jedis.smembers(likeKey1));
-        jedis.smove(likeKey2, likeKey1, "25");
+        jedis.smove(likeKey2, likeKey1, "25"); //从一移进2一个25
         print(28, jedis.smembers(likeKey1));
-        print(29, jedis.scard(likeKey1));
+        print(29, jedis.scard(likeKey1)); //求总和
 
-        String rankKey = "rankKey";
+        String rankKey = "rankKey";//优先队列zset（）
         jedis.zadd(rankKey, 15, "jim");
         jedis.zadd(rankKey, 60, "Ben");
         jedis.zadd(rankKey, 90, "Lee");
         jedis.zadd(rankKey, 75, "Lucy");
         jedis.zadd(rankKey, 80, "Mei");
-        print(30, jedis.zcard(rankKey));
+        print(30, jedis.zcard(rankKey));// zcard（）输出
         print(31, jedis.zcount(rankKey, 61, 100));
         print(32, jedis.zscore(rankKey, "Lucy"));
         jedis.zincrby(rankKey, 2, "Lucy");
@@ -112,9 +114,9 @@ public class JedisAdapter implements InitializingBean {
         jedis.zincrby(rankKey, 2, "Luc");
         print(34, jedis.zscore(rankKey, "Luc"));
         print(35, jedis.zrange(rankKey, 0, 100));
-        print(36, jedis.zrange(rankKey, 0, 10));
+        print(36, jedis.zrange(rankKey, 0, 10));//范围输出
         print(36, jedis.zrange(rankKey, 1, 3));
-        print(36, jedis.zrevrange(rankKey, 1, 3));
+        print(36, jedis.zrevrange(rankKey, 1, 3));//从低到高排列
         for (Tuple tuple : jedis.zrangeByScoreWithScores(rankKey, "60", "100")) {
             print(37, tuple.getElement() + ":" + String.valueOf(tuple.getScore()));
         }
@@ -130,14 +132,14 @@ public class JedisAdapter implements InitializingBean {
         jedis.zadd(setKey, 1, "e");
 
         print(40, jedis.zlexcount(setKey, "-", "+"));
-        print(41, jedis.zlexcount(setKey, "(b", "[d"));
-        print(42, jedis.zlexcount(setKey, "[b", "[d"));
+        print(41, jedis.zlexcount(setKey, "(b", "[d"));//不包含
+        print(42, jedis.zlexcount(setKey, "[b", "[d"));//包含，b到d
         jedis.zrem(setKey, "b");
         print(43, jedis.zrange(setKey, 0, 10));
         jedis.zremrangeByLex(setKey, "(c", "+");
         print(44, jedis.zrange(setKey, 0 ,2));
 
-        /*
+        /*连接池
         JedisPool pool = new JedisPool();
         for (int i = 0; i < 100; ++i) {
             Jedis j = pool.getResource();
@@ -151,11 +153,11 @@ public class JedisAdapter implements InitializingBean {
         user.setHeadUrl("a.png");
         user.setSalt("salt");
         user.setId(1);
-        print(46, JSONObject.toJSONString(user));
+        print(46, JSONObject.toJSONString(user));//序列化user
         jedis.set("user1", JSONObject.toJSONString(user));
 
         String value = jedis.get("user1");
-        User user2 = JSON.parseObject(value, User.class);
+        User user2 = JSON.parseObject(value, User.class);//反序列化，转化为user对象；
         print(47, user2);
         int k = 2;
 
