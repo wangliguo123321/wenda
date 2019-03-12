@@ -1,9 +1,12 @@
 package com.nowcoder.dao;
 
-import com.nowcoder.model.Comment;
+
 import com.nowcoder.model.Message;
-import lombok.Data;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 @Mapper
@@ -18,9 +21,9 @@ public interface MessageDAO {
 
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME,
             " where conversation_id=#{conversationId} order by created_date desc limit #{offset}, #{limit}"})
-    List<Message> getConversationDetail(@Param("conversationId") String conversationId,
-                                        @Param("offset") int offset,
-                                        @Param("limit") int limit);
+    List <Message> getConversationDetail(@Param("conversationId") String conversationId,
+                                         @Param("offset") int offset,
+                                         @Param("limit") int limit);
 
     @Select({"select ", INSERT_FIELDS, " , count(id) as id from ( select * from ", TABLE_NAME,
             " where from_id=#{userId} or to_id=#{userId} order by created_date desc) tt group by conversation_id order by created_date desc limit #{offset}, #{limit}"})
