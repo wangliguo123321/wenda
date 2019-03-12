@@ -9,8 +9,8 @@ import java.util.Date;
 @Component
 
 public class Comment {
-    private int id;
     private int userId;
+    private int id;
     private int entityId;
     private int entityType;
     private String content;
