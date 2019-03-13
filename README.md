@@ -1,5 +1,8 @@
 # wenda
 暑假学习项目
+项目思维导图
+![](http://ww1.sinaimg.cn/large/b06adeeegy1g11ed4lb6wj233o2blx6p.jpg)
+
 ### 登陆注册的实现：三步骤：
 
 #### 1: 使用拦截器：所有controller之前，留下插入点passportInterceptor；
@@ -167,4 +170,121 @@
     group by conversation_id order by created_date desc limit #{offset}, #{limit}"}
     
     
+    
+### Redis的使用
+#### Redis数据结构
+     List：双向列表，适用于最新列表，关注列表
+     lpush
+     lpop
+     blpop
+     lindex
+     lrange
+     lrem
+     linsert
+     lset
+     rpush
+  Set：适用于无顺序的集合，点赞点踩，抽奖，已读，共同好友
+    
+     sdiff
+     smembers
+     sinter
+     scard
+   SortedSet：排行榜，优先队列
+    
+     zadd
+     zscore
+     zrange
+     zcount
+     zrank
+     zrevrank
+   Hash：对象属性，不定长属性数
+    
+     hset
+     hget
+     hgetAll
+     hexists
+     hkeys
+     hvals
+   KV：单一数值，验证码，PV，缓存
+     set
+     setex
+     incr
+     
+  ### 异步队列：（观察者模式）
+  1：事件先定义事件类型
+  2：定义事件模型（EventType type;int actorId;int entityType;int entityId; int entityOwnerId）
+  3：发生事件，序列化后保存到队列中
+  4：对应事件的处理：
+          
+    1：通过继承（InitializingBean, ApplicationContextAware）
+    取到所有的处理方法beans：（applicationContext.getBeansOfType( EventHandler.class )）
+    2：定义Map <EventType, List <EventHandler>> config，
+    往config里面加各种事件类型，Handler(利用beans取到事件类型entryTypes)
+    3：事件反序列化（拿到队列最后已给元素储存为list，然后反序列化）
+    4：通过遍历config
+     for (EventHandler handler : config.get( eventModel.getType() )) 
+                                handler.doHandle( eventModel );
+                       
+  ### 邮件的发送
+    引入依赖
+    实现service，util中进行修改；
+  ### 关注的实现
+      关于Redis的事务：利用reids的exec命令保证执行，不然就discard回滚
+      followee/follower两个队列
+    保证事务的两个函数
+          public Transaction multi(Jedis jedis) {
+                try {
+                    return jedis.multi();
+                } catch (Exception e) {
+                    logger.error("发生异常" + e.getMessage());
+                } finally {
+                }
+                return null;
+            }
+        
+            public List<Object> exec(Transaction tx, Jedis jedis) {
+                try {
+                    return tx.exec(); //保证事务执行
+                } catch (Exception e) {
+                    logger.error("发生异常" + e.getMessage());
+                    tx.discard();   //回滚
+                } finally {
+                    if (tx != null) {
+                        try {
+                            tx.close();
+                        } catch (IOException ioe) {
+                            // ..
+                        }
+                    }
+                    if (jedis != null) {
+                        jedis.close();
+                    }
+                }
+                return null;
+            }
+            //service中对于函数的运用
+    public boolean follow(int userId, int entityType, int entityId) {
+        String followerKey = RedisKeyUtil.getFollowerKey(entityType, entityId);
+        String followeeKey = RedisKeyUtil.getFolloweeKey(userId, entityType);
+        Date date = new Date();
+        // 实体的粉丝增加当前用户
+        Jedis jedis = jedisAdapter.getJedis();
+        Transaction tx = jedisAdapter.multi(jedis);
+        tx.zadd(followerKey, date.getTime(), String.valueOf(userId));
+        // 当前用户对这类实体关注+1
+        tx.zadd(followeeKey, date.getTime(), String.valueOf(entityId));
+        List<Object> ret = jedisAdapter.exec(tx, jedis);
+        return ret.size() == 2 && (Long) ret.get(0) > 0 && (Long) ret.get(1) > 0;
+    }        
+    
+    
+  timeline的实现
+ 
+    private int id;
+    private int type;
+    private int userId;
+    private Date createdDate;
+    private String data;
+    private JSONObject dataJSON = null;
+
     
