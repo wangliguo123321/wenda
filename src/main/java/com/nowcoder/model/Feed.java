@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Data
 @Component
-
 public class Feed {
     private int id;
     private int type;
@@ -16,7 +15,6 @@ public class Feed {
     private Date createdDate;
     private String data;
     private JSONObject dataJSON = null;
-
 
 
     public void setCreatedDate(Date createdDate) {

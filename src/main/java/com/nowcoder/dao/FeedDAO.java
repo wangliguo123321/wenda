@@ -1,10 +1,9 @@
 package com.nowcoder.dao;
 
-import com.nowcoder.model.Comment;
-import com.nowcoder.model.Feed;
-import org.apache.ibatis.annotations.*;
-
-import java.util.List;
+        import com.nowcoder.model.Comment;
+        import com.nowcoder.model.Feed;
+        import org.apache.ibatis.annotations.*;
+        import java.util.List;
 
 
 @Mapper
@@ -23,4 +22,5 @@ public interface FeedDAO {
     List<Feed> selectUserFeeds(@Param("maxId") int maxId,
                                @Param("userIds") List<Integer> userIds,
                                @Param("count") int count);
+
 }

@@ -34,7 +34,7 @@ public class FeedHandler implements EventHandler {
 
 
     private String buildFeedData(EventModel model) {
-        Map<String, String> map = new HashMap<String ,String>();
+        Map<String, String> map = new HashMap<>();
         // 触发用户是通用的
         User actor = userService.getUser(model.getActorId());
         if (actor == null) {
