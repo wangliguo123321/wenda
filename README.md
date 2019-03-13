@@ -3,6 +3,9 @@
 项目思维导图
 ![](http://ww1.sinaimg.cn/large/b06adeeegy1g11ed4lb6wj233o2blx6p.jpg)
 
+
+![](http://ww1.sinaimg.cn/large/b06adeeegy1g11ed4lb6wj233o2blx6p.jpg)
+
 ### 登陆注册的实现：三步骤：
 
 #### 1: 使用拦截器：所有controller之前，留下插入点passportInterceptor；
