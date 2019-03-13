@@ -1,13 +1,8 @@
 # wenda
 暑假学习项目
-项目思维导图
-
-
+项目思维导图（太大了显示不出来）
+http://ww1.sinaimg.cn/large/b06adeeegy1g11exizt2gj233o2blx6p.jpg
 ![](http://ww1.sinaimg.cn/large/b06adeeegy1g11exizt2gj233o2blx6p.jpg)
-
-
-
-
 
 
 ### 登陆注册的实现：三步骤：
